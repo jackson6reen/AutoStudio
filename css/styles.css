@@ -7,21 +7,21 @@
    -------------------------------------------------------------------------- */
 :root {
     /* Color Palette */
-    --bg-primary: #0f1115;
-    --bg-secondary: #181a1f;
-    --bg-elevated: #22242a;
+    --bg-primary: #111214;
+    --bg-secondary: #18191c;
+    --bg-elevated: #222327;
     
-    --text-primary: #e6e4e0;
-    --text-secondary: #8f939c;
-    --text-inverse: #0f1115;
+    --text-primary: #f2f2f2;
+    --text-secondary: #9da0a6;
+    --text-inverse: #111214;
     
-    --accent-metallic: #c4c7cc;
+    --accent-metallic: #d1d4d8;
     --accent-hover: #ffffff;
     --whatsapp-green: #25D366;
     
     /* Typography */
-    --font-sans: 'Heebo', sans-serif;
-    --font-heading: 'Oswald', sans-serif;
+    --font-sans: 'Open Sans', sans-serif;
+    --font-heading: 'Open Sans', sans-serif;
     
     /* Spacing */
     --space-xs: 0.5rem;
@@ -393,6 +393,7 @@ h1, h2, h3, h4, h5, h6 {
 .image-before {
     z-index: 2;
     clip-path: inset(0 50% 0 0);
+    filter: contrast(0.85) brightness(1.2) sepia(0.15) blur(0.5px);
 }
 
 .slider-handle {
