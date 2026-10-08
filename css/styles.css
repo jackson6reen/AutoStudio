@@ -506,6 +506,13 @@ p {
     aspect-ratio: 4/3;
     background: var(--bg-tertiary);
     position: relative;
+    overflow: hidden;
+}
+
+.service-image img {
+    transition: transform var(--transition-smooth);
+    transform: scale(1.4); /* Zoom in to hide logos on shirts */
+    object-position: center 30%; /* Focus on the hands/car */
 }
 
 /* --------------------------------------------------------------------------
@@ -904,7 +911,7 @@ p {
 
 .footer {
     border-top: 1px solid var(--border-light);
-    padding: 4rem 0;
+    padding: 2rem 0;
     background: var(--bg-secondary);
 }
 
@@ -944,15 +951,15 @@ p {
     bottom: 0;
     left: 0;
     width: 100%;
-    padding: 0.75rem 1rem;
+    padding: 0.5rem 1rem;
     background: var(--bg-primary);
     border-top: 1px solid var(--border-light);
     z-index: 99;
 }
 
 .mobile-sticky-cta .btn {
-    padding: 0.875rem 2rem;
-    font-size: 1rem;
+    padding: 0.6rem 1rem;
+    font-size: 0.95rem;
 }
 
 @media (max-width: 1024px) {
@@ -1024,7 +1031,7 @@ p {
     }
     
     body {
-        padding-bottom: 70px; /* Space for sticky CTA */
+        padding-bottom: 55px; /* Space for sticky CTA */
     }
     
     .footer-inner {
