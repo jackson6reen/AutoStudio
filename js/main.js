@@ -1,5 +1,5 @@
 /**
- * AUTO STUDIO - Main JavaScript
+ * AUTO STUDIO - Premium Automotive Detailing & Paint Correction JavaScript
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -10,14 +10,15 @@ document.addEventListener('DOMContentLoaded', () => {
         yearElement.textContent = new Date().getFullYear();
     }
 
-    // Accordion Logic for FAQ
+    // --------------------------------------------------------------------------
+    // FAQ Accordion Logic
+    // --------------------------------------------------------------------------
     const accordionItems = document.querySelectorAll('.accordion-item');
     
     accordionItems.forEach(item => {
         const header = item.querySelector('.accordion-header');
         
         header.addEventListener('click', () => {
-            // Close currently open item
             const currentlyActive = document.querySelector('.accordion-item.active');
             
             if (currentlyActive && currentlyActive !== item) {
@@ -25,7 +26,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 currentlyActive.querySelector('.accordion-content').style.maxHeight = null;
             }
             
-            // Toggle current item
             item.classList.toggle('active');
             
             const content = item.querySelector('.accordion-content');
@@ -37,7 +37,18 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // Open first accordion item by default
+    if (accordionItems.length > 0) {
+        accordionItems[0].classList.add('active');
+        const firstContent = accordionItems[0].querySelector('.accordion-content');
+        if (firstContent) {
+            firstContent.style.maxHeight = firstContent.scrollHeight + "px";
+        }
+    }
+
+    // --------------------------------------------------------------------------
     // Before/After Slider Logic
+    // --------------------------------------------------------------------------
     const slider = document.querySelector('.image-comparison-slider');
     if (slider) {
         const beforeImage = slider.querySelector('.image-before');
@@ -47,7 +58,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const slide = (e) => {
             if (!isSliding) return;
             
-            // Get position
             let position;
             const rect = slider.getBoundingClientRect();
             
@@ -57,14 +67,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 position = e.touches[0].clientX - rect.left;
             }
             
-            // Clamp position between 0 and width
             position = Math.max(0, Math.min(position, rect.width));
-            
-            // Calculate percentage based on RTL or LTR
-            // Since it's RTL but the slider visual logic goes left to right physically:
             const percentage = (position / rect.width) * 100;
             
-            // Adjust clip-path and handle position
             beforeImage.style.clipPath = `inset(0 ${100 - percentage}% 0 0)`;
             sliderHandle.style.left = `${percentage}%`;
         };
@@ -79,17 +84,83 @@ document.addEventListener('DOMContentLoaded', () => {
         window.addEventListener('touchmove', slide, { passive: true });
     }
 
-    // Header scroll effect
+    // --------------------------------------------------------------------------
+    // Header Scroll Glassmorphism Effect
+    // --------------------------------------------------------------------------
     const header = document.querySelector('.header');
-    
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
-            header.style.background = 'rgba(15, 17, 21, 0.95)';
-            header.style.boxShadow = '0 4px 30px rgba(0, 0, 0, 0.5)';
-        } else {
-            header.style.background = 'rgba(15, 17, 21, 0.85)';
-            header.style.boxShadow = 'none';
+    if (header) {
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 40) {
+                header.style.background = 'rgba(9, 10, 13, 0.95)';
+                header.style.borderBottomColor = 'rgba(212, 175, 55, 0.2)';
+                header.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.5)';
+            } else {
+                header.style.background = 'rgba(9, 10, 13, 0.85)';
+                header.style.borderBottomColor = 'rgba(255, 255, 255, 0.06)';
+                header.style.boxShadow = 'none';
+            }
+        }, { passive: true });
+    }
+
+    // --------------------------------------------------------------------------
+    // Interactive Estimator / Treatment Wizard
+    // --------------------------------------------------------------------------
+    const wizardState = {
+        condition: null,
+        goal: null
+    };
+
+    const wizardOptions = document.querySelectorAll('.wizard-option-btn');
+    const wizardResult = document.getElementById('wizard-result');
+    const resultTitle = document.getElementById('result-package-title');
+    const resultDesc = document.getElementById('result-package-desc');
+    const resultCta = document.getElementById('result-package-cta');
+
+    const packagesMap = {
+        'new_showroom': {
+            title: 'חבילת Ceramic Protection & PPF',
+            desc: 'הגנה היקפית מלאה לרכב חדש. ציפוי קרמי מתקדם (Gtechniq/Modesta) או ציפוי PPF שקוף השומר על צבע היצרן ללא שריטה ומקל על השטיפה.',
+            msg: 'היי%20Auto%20Studio,%20מעוניין%20בחבילת%20הגנה%20לרכב%20חדש%20מהסוכנות.%20אשמח%20לפרטים.'
+        },
+        'swirls_shine': {
+            title: 'חבילת Paint Correction & Gloss Reset',
+            desc: 'פוליש רב-שלבי מדויק להעלמת 85-95% מסימני הסווירל והשריטות, בשילוב ציפוי קרמי נאנו להעמקת הברק ומניעת חמצון.',
+            msg: 'היי%20Auto%20Studio,%20מעוניין%20בחידוש%20ברק%20והעלמת%20שריטות%20לרכב%20שלי.%20אשמח%20לפרטים.'
+        },
+        'full_restore': {
+            title: 'AUTO STUDIO SIGNATURE DETAIL',
+            desc: 'שיקום טוטאלי מקיף (פנים וחוץ). אבחון בלייזר, תיקון לכה עמוק, דיטיילינג פנים מלא וריענון עור, בשילוב ציפוי קרמי מלא.',
+            msg: 'היי%20Auto%20Studio,%20מעוניין%20בטיפול%20Signature%20הטוטאלי%20לשיקום%20מלא%20של%20הרכב.'
         }
-    }, { passive: true });
+    };
+
+    wizardOptions.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const group = btn.dataset.group;
+            const val = btn.dataset.val;
+
+            // Remove active from sibling buttons in group
+            document.querySelectorAll(`.wizard-option-btn[data-group="${group}"]`).forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            wizardState[group] = val;
+
+            // Check if both selected
+            if (wizardState.condition) {
+                let pkgKey = 'swirls_shine';
+                if (wizardState.condition === 'new') pkgKey = 'new_showroom';
+                else if (wizardState.condition === 'used') pkgKey = 'full_restore';
+
+                const pkg = packagesMap[pkgKey];
+                if (resultTitle && resultDesc && resultCta) {
+                    resultTitle.textContent = pkg.title;
+                    resultDesc.textContent = pkg.desc;
+                    resultCta.href = `https://wa.me/972509571597?text=${pkg.msg}`;
+                    wizardResult.style.display = 'block';
+                    wizardResult.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }
+            }
+        });
+    });
 
 });
