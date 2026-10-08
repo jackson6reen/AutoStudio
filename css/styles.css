@@ -2,7 +2,7 @@
    AUTO STUDIO - Premium Automotive Detailing
    ========================================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700;800&display=swap');
 
 /* --------------------------------------------------------------------------
    VARIABLES
@@ -24,7 +24,7 @@
     --whatsapp: #25D366;
     
     /* Typography */
-    --font-hebrew: 'Assistant', sans-serif;
+    --font-hebrew: 'Open Sans', sans-serif;
     --font-english: 'Space Grotesk', sans-serif;
     
     /* Spacing */
@@ -235,15 +235,44 @@ h1, h2, h3, h4, h5, h6 {
 .logo {
     display: flex;
     flex-direction: column;
+    align-items: center;
+}
+
+.logo-as {
+    font-size: 2.5rem;
+    font-weight: 800;
+    line-height: 1;
+    display: flex;
+    align-items: baseline;
+    margin-bottom: 0.25rem;
+}
+
+.logo-a {
+    color: var(--text-primary);
+    font-family: var(--font-english);
+}
+
+.logo-s {
+    color: #d4af37; /* Premium Gold from brand card */
+    font-family: var(--font-english);
 }
 
 .logo-main {
     font-family: var(--font-english);
     font-size: 1.25rem;
     font-weight: 700;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.2em;
     line-height: 1;
-    color: var(--text-primary);
+    color: #d4af37; /* Premium Gold */
+}
+
+.logo-sub {
+    font-family: var(--font-english);
+    font-size: 0.5rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    color: var(--text-secondary);
+    margin-top: 0.25rem;
 }
 
 .desktop-nav {
@@ -660,14 +689,148 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* --------------------------------------------------------------------------
-   SOCIAL PROOF (PLACEHOLDER)
+   SOCIAL PROOF (GOOGLE REVIEWS MARQUEE)
    -------------------------------------------------------------------------- */
-.reviews-placeholder {
-    border: 1px dashed var(--border-strong);
-    padding: 4rem 2rem;
-    text-align: center;
+.reviews-marquee-container {
+    margin-top: 4rem;
+    overflow: hidden;
+    position: relative;
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    padding: 2rem 0;
+}
+
+.reviews-marquee-container::before,
+.reviews-marquee-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    width: 15%;
+    height: 100%;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.reviews-marquee-container::before {
+    left: 0;
+    background: linear-gradient(to right, var(--bg-secondary) 0%, transparent 100%);
+}
+
+.reviews-marquee-container::after {
+    right: 0;
+    background: linear-gradient(to left, var(--bg-secondary) 0%, transparent 100%);
+}
+
+.reviews-track {
+    display: flex;
+    gap: 1.5rem;
+    width: max-content;
+    direction: ltr; /* Ensure scrolling logic works predictably */
+    animation: scroll-marquee 40s linear infinite;
+}
+
+.reviews-track:hover {
+    animation-play-state: paused;
+}
+
+.reviews-track.reverse {
+    animation: scroll-marquee-reverse 45s linear infinite;
+    margin-top: 1.5rem;
+}
+
+.reviews-track.reverse:hover {
+    animation-play-state: paused;
+}
+
+@keyframes scroll-marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(calc(-50% - 0.75rem)); }
+}
+
+@keyframes scroll-marquee-reverse {
+    0% { transform: translateX(calc(-50% - 0.75rem)); }
+    100% { transform: translateX(0); }
+}
+
+.review-card {
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-md);
+    padding: 2rem;
+    width: 380px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    direction: rtl; /* Content remains RTL */
+    flex-shrink: 0;
+}
+
+.review-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.reviewer-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.reviewer-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #4285F4;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 1.125rem;
+    font-family: var(--font-hebrew);
+}
+
+.reviewer-avatar.c1 { background: #EA4335; }
+.reviewer-avatar.c2 { background: #FBBC05; }
+.reviewer-avatar.c3 { background: #34A853; }
+.reviewer-avatar.c4 { background: #8E24AA; }
+.reviewer-avatar.c5 { background: #F4511E; }
+
+.reviewer-name {
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--text-primary);
+    line-height: 1.2;
+    margin-bottom: 0.25rem;
+}
+
+.review-time {
+    font-size: 0.75rem;
     color: var(--text-muted);
-    margin-top: 3rem;
+}
+
+.google-icon svg {
+    width: 24px;
+    height: 24px;
+}
+
+.review-stars {
+    display: flex;
+    gap: 2px;
+}
+
+.star-icon {
+    width: 16px;
+    height: 16px;
+    fill: #FBBC04;
+}
+
+.review-text {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    flex-grow: 1;
 }
 
 /* --------------------------------------------------------------------------
@@ -779,6 +942,32 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 @media (max-width: 1024px) {
+    .header-inner {
+        height: auto;
+        padding: 0.75rem 0;
+    }
+
+    .logo-as {
+        font-size: 1.75rem;
+    }
+
+    .logo-main {
+        font-size: 1rem;
+    }
+
+    .logo-sub {
+        font-size: 0.4rem;
+    }
+    
+    .hero-content {
+        padding-top: 180px; /* Prevent title from colliding with logo */
+    }
+
+    .hero-title {
+        font-size: clamp(1.75rem, 7vw, 2.75rem);
+        line-height: 1.1;
+    }
+
     .grid-2 {
         grid-template-columns: 1fr;
         gap: 3rem;
