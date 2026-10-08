@@ -58,6 +58,7 @@ html {
     font-size: 16px;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
 }
 
 body {
@@ -102,6 +103,11 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: 700;
     line-height: 1.1;
     letter-spacing: -0.02em;
+    text-wrap: balance;
+}
+
+p {
+    text-wrap: pretty;
 }
 
 .technical-label {
@@ -951,15 +957,18 @@ h1, h2, h3, h4, h5, h6 {
     }
 
     .logo-as {
-        font-size: 1.75rem;
+        font-size: 1.5rem;
     }
 
     .logo-main {
-        font-size: 1rem;
+        font-size: 0.875rem;
     }
 
     .logo-sub {
-        font-size: 0.4rem;
+        font-size: 0.35rem;
+        white-space: normal;
+        text-align: center;
+        line-height: 1.2;
     }
     
     .hero-content {
