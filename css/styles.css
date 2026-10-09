@@ -316,7 +316,8 @@ p {
     position: relative;
     min-height: 100vh;
     display: flex;
-    align-items: flex-end;
+    align-items: center;
+    padding-top: 15vh;
     padding-bottom: var(--space-lg);
 }
 
