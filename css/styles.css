@@ -258,29 +258,33 @@ p {
 
 .header-logo-img {
     height: 52px;
-    width: 52px;
+    width: auto;
+    max-width: 140px;
     object-fit: contain;
-    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.7));
-    transition: transform var(--transition-fast), filter var(--transition-fast);
+    border-radius: 6px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
 }
 
 .header-logo-img:hover {
-    transform: scale(1.06);
-    filter: drop-shadow(0 4px 12px rgba(255, 255, 255, 0.25));
+    transform: scale(1.04);
+    box-shadow: 0 6px 20px rgba(255, 255, 255, 0.15);
 }
 
 .footer-logo-img {
     height: 48px;
-    width: 48px;
+    width: auto;
+    max-width: 130px;
     object-fit: contain;
+    border-radius: 6px;
     opacity: 0.9;
-    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.6));
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
     transition: opacity var(--transition-fast), transform var(--transition-fast);
 }
 
 .footer-logo-img:hover {
     opacity: 1;
-    transform: scale(1.05);
+    transform: scale(1.04);
 }
 
 /* Hero Center Emblem */
@@ -292,18 +296,18 @@ p {
 }
 
 .hero-main-logo {
-    width: 290px;
-    height: 290px;
-    max-width: 82vw;
-    max-height: 82vw;
-    object-fit: contain;
-    filter: drop-shadow(0 15px 40px rgba(0, 0, 0, 0.9)) drop-shadow(0 0 30px rgba(255, 255, 255, 0.12));
-    transition: transform var(--transition-smooth), filter var(--transition-smooth);
+    width: 440px;
+    max-width: 88vw;
+    height: auto;
+    border-radius: 16px;
+    box-shadow: 0 16px 45px rgba(0, 0, 0, 0.85), 0 0 35px rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    transition: transform var(--transition-smooth), box-shadow var(--transition-smooth);
 }
 
 .hero-main-logo:hover {
-    transform: scale(1.03);
-    filter: drop-shadow(0 22px 55px rgba(0, 0, 0, 0.95)) drop-shadow(0 0 45px rgba(255, 255, 255, 0.22));
+    transform: scale(1.02);
+    box-shadow: 0 22px 55px rgba(0, 0, 0, 0.95), 0 0 45px rgba(255, 255, 255, 0.18);
 }
 
 .desktop-nav {
@@ -965,17 +969,19 @@ p {
     }
 
     .header-logo-img {
-        height: 42px;
-        width: 42px;
+        height: 38px;
+        width: auto;
+        max-width: 110px;
     }
     
     .hero-content {
-        padding-top: 90px;
+        padding-top: 85px;
     }
 
     .hero-main-logo {
-        width: 200px;
-        height: 200px;
+        width: 320px;
+        max-width: 90vw;
+        height: auto;
     }
 
     .hero-title {
