@@ -256,41 +256,54 @@ p {
     justify-self: center;
 }
 
-.logo-as {
-    font-size: 3.5rem;
-    font-weight: 800;
-    line-height: 1;
+.header-logo-img {
+    height: 52px;
+    width: 52px;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.7));
+    transition: transform var(--transition-fast), filter var(--transition-fast);
+}
+
+.header-logo-img:hover {
+    transform: scale(1.06);
+    filter: drop-shadow(0 4px 12px rgba(255, 255, 255, 0.25));
+}
+
+.footer-logo-img {
+    height: 48px;
+    width: 48px;
+    object-fit: contain;
+    opacity: 0.9;
+    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.6));
+    transition: opacity var(--transition-fast), transform var(--transition-fast);
+}
+
+.footer-logo-img:hover {
+    opacity: 1;
+    transform: scale(1.05);
+}
+
+/* Hero Center Emblem */
+.hero-brand-emblem {
     display: flex;
-    align-items: baseline;
-    margin-bottom: 0.25rem;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 2.25rem auto;
 }
 
-.logo-a {
-    color: var(--text-primary);
-    font-family: var(--font-english);
+.hero-main-logo {
+    width: 290px;
+    height: 290px;
+    max-width: 82vw;
+    max-height: 82vw;
+    object-fit: contain;
+    filter: drop-shadow(0 15px 40px rgba(0, 0, 0, 0.9)) drop-shadow(0 0 30px rgba(255, 255, 255, 0.12));
+    transition: transform var(--transition-smooth), filter var(--transition-smooth);
 }
 
-.logo-s {
-    color: #d4af37; /* Premium Gold from brand card */
-    font-family: var(--font-english);
-}
-
-.logo-main {
-    font-family: var(--font-english);
-    font-size: 1.5rem;
-    font-weight: 700;
-    letter-spacing: 0.2em;
-    line-height: 1;
-    color: #d4af37; /* Premium Gold */
-}
-
-.logo-sub {
-    font-family: var(--font-english);
-    font-size: 0.5rem;
-    font-weight: 500;
-    letter-spacing: 0.15em;
-    color: var(--text-secondary);
-    margin-top: 0.25rem;
+.hero-main-logo:hover {
+    transform: scale(1.03);
+    filter: drop-shadow(0 22px 55px rgba(0, 0, 0, 0.95)) drop-shadow(0 0 45px rgba(255, 255, 255, 0.22));
 }
 
 .desktop-nav {
@@ -524,8 +537,12 @@ p {
 
 .service-image img {
     transition: transform var(--transition-smooth);
-    transform: scale(1.4); /* Zoom in to hide logos on shirts */
-    object-position: center 30%; /* Focus on the hands/car */
+    transform: scale(1);
+    object-position: center;
+}
+
+.service-block:hover .service-image img {
+    transform: scale(1.04);
 }
 
 /* --------------------------------------------------------------------------
@@ -947,23 +964,18 @@ p {
         justify-content: center;
     }
 
-    .logo-as {
-        font-size: 2.5rem;
-    }
-
-    .logo-main {
-        font-size: 1rem;
-    }
-
-    .logo-sub {
-        font-size: 0.35rem;
-        white-space: normal;
-        text-align: center;
-        line-height: 1.2;
+    .header-logo-img {
+        height: 42px;
+        width: 42px;
     }
     
     .hero-content {
-        padding-top: 220px; /* Prevent title from colliding with logo */
+        padding-top: 90px;
+    }
+
+    .hero-main-logo {
+        width: 200px;
+        height: 200px;
     }
 
     .hero-title {
