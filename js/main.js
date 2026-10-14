@@ -55,42 +55,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // --------------------------------------------------------------------------
-    // Before/After Slider Logic
-    // --------------------------------------------------------------------------
-    const slider = document.querySelector('.image-comparison-slider');
-    if (slider) {
-        const beforeImage = slider.querySelector('.image-before');
-        const sliderHandle = slider.querySelector('.slider-handle');
-        let isSliding = false;
 
-        const slide = (e) => {
-            if (!isSliding) return;
-            
-            let position;
-            const rect = slider.getBoundingClientRect();
-            
-            if (e.type.includes('mouse')) {
-                position = e.clientX - rect.left;
-            } else if (e.type.includes('touch')) {
-                position = e.touches[0].clientX - rect.left;
-            }
-            
-            position = Math.max(0, Math.min(position, rect.width));
-            const percentage = (position / rect.width) * 100;
-            
-            beforeImage.style.clipPath = `inset(0 ${100 - percentage}% 0 0)`;
-            sliderHandle.style.left = `${percentage}%`;
-        };
-
-        slider.addEventListener('mousedown', () => isSliding = true);
-        slider.addEventListener('touchstart', () => isSliding = true, { passive: true });
-        
-        window.addEventListener('mouseup', () => isSliding = false);
-        window.addEventListener('touchend', () => isSliding = false);
-        
-        window.addEventListener('mousemove', slide);
-        window.addEventListener('touchmove', slide, { passive: true });
-    }
 
 });
